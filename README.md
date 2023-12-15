@@ -22,13 +22,13 @@ make -j4
 
    <img src="./doc/app_retroid.png" alt="a" style="zoom:60%;" />
 
-   <center>app显示界面</center>
+   <p style="text-align:center;">app显示界面</p>
 
 2. 获取需要通讯主机的ip地址，配置程序中设置的端口号，通过点击app右上角感叹号进入配置
 
    <img src="./doc/ip_config.png" alt="s" style="zoom:67%;" />
 
-   <center>ip配置界面</center>
+   <p style="text-align:center;">ip配置界面</p>
 
    
 
@@ -45,13 +45,13 @@ make -j4
 
    <img src="./doc/terminal_show_info.png" alt="a" style="zoom:75%;" />
 
-   <center>Skydroid手柄接受显示</center>
+   <p style="text-align:center;">Skydroid手柄通讯成功显示界面</p>
 
    
 
    <img src="./doc/terminal_show_info_retroid.png" alt="s" style="zoom:75%;" />
 
-   <center>Retroid手柄接受显示</center>
+   <p style="text-align:center;">Retroid手柄通讯成功显示界面</p>
 
    
 
