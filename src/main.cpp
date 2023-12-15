@@ -1,5 +1,4 @@
 #include <iostream>
-// #include "gamepad/gamepad product.h"
 
 #include "gamepad.h"
 #include "retroid_gamepad.h"
@@ -10,10 +9,13 @@
 
 
 int main(int argc, char* argv[]) {
-  RetroidGamepad rc(42121);
+  RetroidGamepad rc(12121);
   const RetroidKeys *keys = &rc.GetKeys();
-  // SkydroidGamepad rc(43897);
+
+  // SkydroidGamepad rc(12121);
   // const SkydroidKeys *keys = &rc.GetKeys();
+
+  rc.StartDataThread();
 
   rc.updateCallback_ = [&](int32_t count){
     std::cout << rc << std::endl;

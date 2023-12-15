@@ -29,7 +29,7 @@ const size_t kSwitchKeysSize = 4;
 const uint16_t kJoystickRange = 1000;
 
 /** @brief Default UDP port for gamepad data reception. */
-const uint16_t kDefaultPort = 43893;
+const uint16_t kDefaultPort = 12121;
 
 /** @brief Header bytes for identifying gamepad data. */
 const unsigned char kHeader[kHeaderSize] = {0x55, 0x66};
