@@ -9,6 +9,7 @@
 ```
 git clone git@github.com:DeepRoboticsLab/gamepad.git
 cd gamepad
+git clone git@github.com:fmtlib/fmt.git
 mkdir build && cd build
 cmake ..
 make -j4
