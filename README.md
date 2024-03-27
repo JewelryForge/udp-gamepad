@@ -7,8 +7,7 @@
 在main.cpp中根据使用的手柄修改程序，默认使用的是skydroid(云卓)手柄
 
 ```
-git clone git@github.com:DeepRoboticsLab/gamepad.git
-git submodule update --init --recursive
+git clone --recurse-submodules git@github.com:DeepRoboticsLab/gamepad.git
 mkdir build && cd build
 cmake .. -DBUILD_EXAMPLE=ON
 make -j4
