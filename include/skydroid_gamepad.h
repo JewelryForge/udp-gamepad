@@ -4,9 +4,6 @@
 #include <iostream>
 #include <ostream>
 #include "gamepad.h"
-#include "fmt/format.h"
-#include "fmt/core.h"
-#include "fmt/chrono.h"
 
 /**
  * @brief A specialized class for Skydroid gamepad.
@@ -24,16 +21,16 @@ public:
    */
   SkydroidGamepad(int port = kDefaultPort);
 
-  /**
-   * @brief Overloaded output stream operator for SkydroidGamepad.
-   *
-   * Allows printing SkydroidGamepad information to an output stream.
-   *
-   * @param o The output stream.
-   * @param is The SkydroidGamepad object.
-   * @return Reference to the output stream.
-   */
-  friend std::ostream& operator<<(std::ostream& o, SkydroidGamepad& is);
+  // /**
+  //  * @brief Overloaded output stream operator for SkydroidGamepad.
+  //  *
+  //  * Allows printing SkydroidGamepad information to an output stream.
+  //  *
+  //  * @param o The output stream.
+  //  * @param is The SkydroidGamepad object.
+  //  * @return Reference to the output stream.
+  //  */
+  // friend std::ostream& operator<<(std::ostream& o, SkydroidGamepad& is);
 
 protected:
   /**
@@ -54,15 +51,4 @@ protected:
   bool DataIsValid(const SkydroidGamepadData& data);
 };
 
-/**
- * @brief Overloaded output stream operator for SkydroidGamepad.
- *
- * Allows printing SkydroidGamepad information to an output stream.
- *
- * @param o The output stream.
- * @param is The SkydroidGamepad object.
- * @return Reference to the output stream.
- */
-std::ostream& operator<<(std::ostream& o, SkydroidGamepad& is);
-
-#endif // Skydroid_GAMEPAD_H
+#endif // SKYDROID_GAMEPAD_H

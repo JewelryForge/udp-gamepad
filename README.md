@@ -8,10 +8,9 @@
 
 ```
 git clone git@github.com:DeepRoboticsLab/gamepad.git
-cd gamepad
-git clone git@github.com:fmtlib/fmt.git
+git submodule update --init --recursive
 mkdir build && cd build
-cmake ..
+cmake .. -DBUILD_EXAMPLE=ON
 make -j4
 ```
 
@@ -25,7 +24,7 @@ make -j4
 
    <p style="text-align:center;">app显示界面</p>
 
-2. 获取需要通讯主机的ip地址，配置程序中设置的端口号，通过点击app右上角感叹号进入配置
+2. 获取需要通讯主机的ip地址，配置程序中设置的端口号，通过点击app右上角感叹号进入配置，需要跟程序中的配置的端口号一致，同时确保程序的端口号没有被其他程序占用。
 
    <img src="./doc/ip_config.png" alt="s" style="zoom:67%;" />
 
@@ -37,7 +36,7 @@ make -j4
 
    ```
    cd build
-   ./gamepad_reciver
+   ./example/example_skydroid or ./example/example_retroid
    ```
 
    

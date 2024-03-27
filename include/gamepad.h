@@ -19,7 +19,7 @@
 template <typename KeysType>
 class Gamepad {
 public:
-    std::vector<std::string> kButtonStatus;
+    std::vector<std::string> button_status_;
     /**
      * @brief Constructor for the Gamepad class.
      *
