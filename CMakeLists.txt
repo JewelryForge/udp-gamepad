@@ -8,8 +8,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(BUILD_EXAMPLE "Example for gamepad sdk in C++" ON)
 
-project(gamepad)
-
 # Add your source files
 file(GLOB SOURCES  "src/*.cpp")
 include_directories(
@@ -22,4 +20,3 @@ target_link_libraries(gamepad_receiver PRIVATE -lpthread -lm -lrt -ldl -lstdc++)
 if(BUILD_EXAMPLE)
   add_subdirectory(example)
 endif()
-
