@@ -4,9 +4,6 @@
 #include <iostream>
 #include <ostream>
 #include "gamepad.h"
-#include "fmt/format.h"
-#include "fmt/core.h"
-#include "fmt/chrono.h"
 
 /**
  * @brief A specialized class for RETROID gamepad.
@@ -24,16 +21,16 @@ public:
    */
   RetroidGamepad(int port = kDefaultPort);
 
-  /**
-   * @brief Overloaded output stream operator for RetroidGamepad.
-   *
-   * Allows printing RetroidGamepad information to an output stream.
-   *
-   * @param o The output stream.
-   * @param is The RetroidGamepad object.
-   * @return Reference to the output stream.
-   */
-  friend std::ostream& operator<<(std::ostream& o, RetroidGamepad& is);
+  // /**
+  //  * @brief Overloaded output stream operator for RetroidGamepad.
+  //  *
+  //  * Allows printing RetroidGamepad information to an output stream.
+  //  *
+  //  * @param o The output stream.
+  //  * @param is The RetroidGamepad object.
+  //  * @return Reference to the output stream.
+  //  */
+  // friend std::ostream& operator<<(std::ostream& o, RetroidGamepad& is);
 
 protected:
   /**
@@ -53,16 +50,5 @@ protected:
    */
   bool DataIsValid(const RetroidGamepadData& data);
 };
-
-/**
- * @brief Overloaded output stream operator for RetroidGamepad.
- *
- * Allows printing RetroidGamepad information to an output stream.
- *
- * @param o The output stream.
- * @param is The RetroidGamepad object.
- * @return Reference to the output stream.
- */
-std::ostream& operator<<(std::ostream& o, RetroidGamepad& is);
 
 #endif // RETROID_GAMEPAD_H

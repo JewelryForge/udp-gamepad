@@ -13,12 +13,7 @@
  * @param port The UDP port to use for receiving controller data.
  */
 SkydroidGamepad::SkydroidGamepad(int port) : Gamepad(port) {
-
-  std::string pressed  = fmt::format("\x1b[32m{:^20}\x1b[0m", "pressed");
-  std::string released = fmt::format("\x1b[37m{:^20}\x1b[0m", "released");
-  kButtonStatus.push_back(released);
-  kButtonStatus.push_back(pressed);
-
+  kButtonStatus.clear();
 }
 
 /**
@@ -82,45 +77,4 @@ bool SkydroidGamepad::DataIsValid(const SkydroidGamepadData& data) {
   return true;  
 }
 
-std::ostream& operator<<(std::ostream& o, SkydroidGamepad& is){
-  
-  SkydroidKeys keys = is.GetKeys();
-  o << "\033c";
-  std::string  s = fmt::format(
-	"┌{0:─^{1}}┐\n"
-	"│{2: ^{1}}│\n"
-	"└{0:─^{1}}┘\n", "", 86 ,"Joystick Device: Skydorid(X30)");
-  o<<s ;
-  s = fmt::format(
-    "┌{2:─^{1}}┐┌{3:─^{1}}┐┌{4:─^{1}}┐┌{5:─^{1}}┐\n"
-    "│{6: ^{1}}││{7: ^{1}}││{8: ^{1}}││{9: ^{1}}│\n"
-    "└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘\n", 
-    "", 20, "A", "B", "C", "D", 
-    is.kButtonStatus[keys.A], is.kButtonStatus[keys.B], is.kButtonStatus[keys.C], is.kButtonStatus[keys.D]);
-  o<<s ;
-  s = fmt::format(
-    "┌{2:─^{1}}┐┌{3:─^{1}}┐┌{4:─^{1}}┐┌{5:─^{1}}┐\n"
-    "│{6: ^{1}}││{7: ^{1}}││{8: ^{1}}││{9: ^{1}}│\n"
-    "└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘\n", 
-    "", 20, "E", "F", "Reserved", "Right", 
-    is.kButtonStatus[keys.E], is.kButtonStatus[keys.F], is.kButtonStatus[keys.reserved], is.kButtonStatus[keys.right]);
-  o<<s ;
-
-  s = fmt::format(
-    "┌{2:─^{1}}┐┌{3:─^{1}}┐┌{4:─^{1}}┐┌{5:─^{1}}┐\n"
-    "│{6: ^{1}}││{7: ^{1}}││{8: ^{1}}││{9: ^{1}}│\n"
-    "└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘\n",
-    "", 20, "SW1", "SW2", "SW3", "SW4", 
-    keys.sw1, keys.sw2, keys.sw3, keys.sw4);
-  o<<s ;
-
-  s = fmt::format(
-    "┌{2:─^{1}}┐┌{3:─^{1}}┐┌{4:─^{1}}┐┌{5:─^{1}}┐\n"
-    "│{6: ^{1}}││{7: ^{1}}││{8: ^{1}}││{9: ^{1}}│\n"
-    "└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘\n", 
-    "", 20, "left_axis_x", "left_axis_y", "right_axis_x", "right_axis_y", 
-    keys.left_axis_x, keys.left_axis_y, keys.right_axis_x, keys.right_axis_y);
-  o<<s ;
-  return o;
-}
 
