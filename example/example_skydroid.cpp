@@ -20,11 +20,11 @@
 #include "fmt/chrono.h"
 
 void InitialSkydroidKeys(SkydroidGamepad& is){
-  is.kButtonStatus.clear();
+  is.button_status_.clear();
   std::string pressed  = fmt::format("\x1b[32m{:^20}\x1b[0m", "pressed");
   std::string released = fmt::format("\x1b[37m{:^20}\x1b[0m", "released");
-  is.kButtonStatus.push_back(released);
-  is.kButtonStatus.push_back(pressed);
+  is.button_status_.push_back(released);
+  is.button_status_.push_back(pressed);
 }
 
 /**
@@ -49,14 +49,14 @@ std::ostream& operator<<(std::ostream& o, SkydroidGamepad& is){
     "│{6: ^{1}}││{7: ^{1}}││{8: ^{1}}││{9: ^{1}}│\n"
     "└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘\n", 
     "", 20, "A", "B", "C", "D", 
-    is.kButtonStatus[keys.A], is.kButtonStatus[keys.B], is.kButtonStatus[keys.C], is.kButtonStatus[keys.D]);
+    is.button_status_[keys.A], is.button_status_[keys.B], is.button_status_[keys.C], is.button_status_[keys.D]);
   o<<s ;
   s = fmt::format(
     "┌{2:─^{1}}┐┌{3:─^{1}}┐┌{4:─^{1}}┐┌{5:─^{1}}┐\n"
     "│{6: ^{1}}││{7: ^{1}}││{8: ^{1}}││{9: ^{1}}│\n"
     "└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘\n", 
     "", 20, "E", "F", "Reserved", "Right", 
-    is.kButtonStatus[keys.E], is.kButtonStatus[keys.F], is.kButtonStatus[keys.reserved], is.kButtonStatus[keys.right]);
+    is.button_status_[keys.E], is.button_status_[keys.F], is.button_status_[keys.reserved], is.button_status_[keys.right]);
   o<<s ;
 
   s = fmt::format(

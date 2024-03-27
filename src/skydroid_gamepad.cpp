@@ -13,7 +13,7 @@
  * @param port The UDP port to use for receiving controller data.
  */
 SkydroidGamepad::SkydroidGamepad(int port) : Gamepad(port) {
-  kButtonStatus.clear();
+  button_status_.clear();
 }
 
 /**

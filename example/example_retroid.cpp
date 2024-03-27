@@ -20,11 +20,11 @@
 #include "fmt/chrono.h"
 
 void InitialRetroidKeys(RetroidGamepad& is){
-  is.kButtonStatus.clear();
+  is.button_status_.clear();
   std::string pressed  = fmt::format("\x1b[32m{:^20}\x1b[0m", "pressed");
   std::string released = fmt::format("\x1b[37m{:^20}\x1b[0m", "released");
-  is.kButtonStatus.push_back(released);
-  is.kButtonStatus.push_back(pressed);
+  is.button_status_.push_back(released);
+  is.button_status_.push_back(pressed);
 }
 
 /**
@@ -49,14 +49,14 @@ std::ostream& operator<<(std::ostream& o, RetroidGamepad& is){
     "│{6: ^{1}}││{7: ^{1}}││{8: ^{1}}││{9: ^{1}}│\n"
     "└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘\n", 
     "", 20, "L2", "L1", "R1", "R2", 
-    is.kButtonStatus[keys.L2], is.kButtonStatus[keys.L1], is.kButtonStatus[keys.R1], is.kButtonStatus[keys.R2]);
+    is.button_status_[keys.L2], is.button_status_[keys.L1], is.button_status_[keys.R1], is.button_status_[keys.R2]);
   o<<s ;
   s = fmt::format(
     "┌{2:─^{1}}┐┌{3:─^{1}}┐┌{4:─^{1}}┐┌{5:─^{1}}┐\n"
     "│{6: ^{1}}││{7: ^{1}}││{8: ^{1}}││{9: ^{1}}│\n"
     "└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘\n", 
     "", 20, "X", "Y", "A", "B", 
-    is.kButtonStatus[keys.X], is.kButtonStatus[keys.Y], is.kButtonStatus[keys.A], is.kButtonStatus[keys.B]);
+    is.button_status_[keys.X], is.button_status_[keys.Y], is.button_status_[keys.A], is.button_status_[keys.B]);
   o<<s ;
 
   s = fmt::format(
@@ -64,7 +64,7 @@ std::ostream& operator<<(std::ostream& o, RetroidGamepad& is){
     "│{6: ^{1}}││{7: ^{1}}││{8: ^{1}}││{9: ^{1}}│\n"
     "└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘\n",
     "", 20, "up", "down", "left", "right", 
-    is.kButtonStatus[keys.up], is.kButtonStatus[keys.down], is.kButtonStatus[keys.left], is.kButtonStatus[keys.right]);
+    is.button_status_[keys.up], is.button_status_[keys.down], is.button_status_[keys.left], is.button_status_[keys.right]);
   o<<s ;
 
 
@@ -74,7 +74,7 @@ std::ostream& operator<<(std::ostream& o, RetroidGamepad& is){
     "│{6: ^{1}}││{7: ^{1}}││{8: ^{1}}││{9: ^{1}}│\n"
     "└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘└{0:─^{1}}┘\n", 
     "", 20, "select", "start", "left_axis_button", "right_axis_button", 
-    is.kButtonStatus[keys.select], is.kButtonStatus[keys.start], is.kButtonStatus[keys.left_axis_button], is.kButtonStatus[keys.right_axis_button]);
+    is.button_status_[keys.select], is.button_status_[keys.start], is.button_status_[keys.left_axis_button], is.button_status_[keys.right_axis_button]);
   // fmt::print(s);
   o<<s ;
   s = fmt::format(

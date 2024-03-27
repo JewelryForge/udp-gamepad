@@ -13,10 +13,7 @@
  * @param port The UDP port to use for receiving gamepad data.
  */
 RetroidGamepad::RetroidGamepad(int port) : Gamepad(port) {
-  // std::string pressed  = fmt::format("\x1b[32m{:^20}\x1b[0m", "pressed");
-  // std::string released = fmt::format("\x1b[37m{:^20}\x1b[0m", "released");
-  // kButtonStatus.push_back(released);
-  // kButtonStatus.push_back(pressed);
+  button_status_.clear();
 }
 
 /**
