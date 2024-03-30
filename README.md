@@ -1,46 +1,55 @@
-# gamepad手册
+# gamepad使用说明
 
+本项目可对手柄物理按键触发事件进行监听，开发者可使用本项目，实时获取手柄上物理按键的触发信息，并可根据这些信息自行开发机器人遥控程序。
 
-
-# 1.代码下载与编译
-
-在main.cpp中根据使用的手柄修改程序，默认使用的是skydroid(云卓)手柄
-
-```
+## 1 代码下载与编译
+将代码仓库克隆到开发主机上，并进行编译：
+```bash
 git clone --recurse-submodules git@github.com:DeepRoboticsLab/gamepad.git
 mkdir build && cd build
 cmake .. -DBUILD_EXAMPLE=ON
 make -j4
 ```
+**[注意]** 程序默认接收手柄数据的端口号为12121，请确保程序的端口号没有被其他程序占用，如有需要，可打开/example目录下的example_retroid.cpp（对应绝影Lite3手柄）或example_skydroid.cpp（对应绝影X30手柄）进行修改：
+```c++
+//以example_retroid.cpp为例
+int main(int argc, char* argv[]) {
+  RetroidGamepad rc(12121); 
+  //RetroidGamepad rc(接收手柄命令的端口号)
+  InitialRetroidKeys(rc);
+  ......
+}
+```
+修改后再进行编译。
 
+&nbsp;
+## 2 程序运行
+- 如果使用的是绝影Lite3的官方手柄，请在手柄中安装retroid.apk；如果使用的是绝影X30的官方手柄，请在手柄中安装skydroid.apk。  
 
+   <img src="./doc/app_icon.jpg" alt="a" style="zoom:60%;" />
 
-# 2.程序运行
-
-1. 在手柄中安装提供的app，在app中按步骤2配置需要连接的主机的ip和端口号
+- 手柄连接上开发主机的网络，然后打开app，点击左上角按钮，配置需要连接的开发主机的ip地址和程序接收手柄数据的端口号。
 
    <img src="./doc/app_retroid.png" alt="a" style="zoom:60%;" />
 
    <p style="text-align:center;">app显示界面</p>
 
-2. 获取需要通讯主机的ip地址，配置程序中设置的端口号，通过点击app右上角感叹号进入配置，需要跟程序中的配置的端口号一致，同时确保程序的端口号没有被其他程序占用。
-
    <img src="./doc/ip_config.png" alt="s" style="zoom:67%;" />
 
    <p style="text-align:center;">ip配置界面</p>
 
-   
-
-3. 编译好代码后，运行程序
-
-   ```
-   cd build
-   ./example/example_skydroid or ./example/example_retroid
-   ```
-
-   
-
-4. 摇动手柄按键，程序正常运行后终端结果如下
+- 运行程序：
+   - 如果是绝影Lite3手柄：
+      ```bash
+      cd build
+      ./example/example_retroid
+      ```
+   - 如果是绝影X30手柄：
+      ```bash
+      cd build
+      ./example/example_skydroid
+      ```
+- 操作手柄物理按键，终端中会显示手柄物理按键的触发信息：
 
    <img src="./doc/terminal_show_info.png" alt="a" style="zoom:75%;" />
 
@@ -51,10 +60,6 @@ make -j4
    <img src="./doc/terminal_show_info_retroid.png" alt="s" style="zoom:75%;" />
 
    <p style="text-align:center;">Retroid手柄通讯成功显示界面</p>
-
-   
-
-5. 后续可以根据自己的需求开发，实现机器人的远程控制。
 
 
 
