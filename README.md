@@ -32,34 +32,32 @@ int main(int argc, char* argv[]) {
 
    <img src="./doc/app_retroid.png" alt="a" style="zoom:60%;" />
 
-   <p style="text-align:center;">app显示界面</p>
+   <p align="center">app显示界面</p>
 
    <img src="./doc/ip_config.png" alt="s" style="zoom:67%;" />
 
-   <p style="text-align:center;">ip配置界面</p>
+   <p align="center">ip配置界面</p>
 
 - 运行程序：
    - 如果是绝影Lite3手柄：
       ```bash
-      cd build
+      cd build/
       ./example/example_retroid
       ```
    - 如果是绝影X30手柄：
       ```bash
-      cd build
+      cd build/
       ./example/example_skydroid
       ```
 - 操作手柄物理按键，终端中会显示手柄物理按键的触发信息：
 
    <img src="./doc/terminal_show_info.png" alt="a" style="zoom:75%;" />
 
-   <p style="text-align:center;">Skydroid手柄通讯成功显示界面</p>
-
-   
+   <p align="center">Skydroid手柄通讯成功显示界面</p>
 
    <img src="./doc/terminal_show_info_retroid.png" alt="s" style="zoom:75%;" />
 
-   <p style="text-align:center;">Retroid手柄通讯成功显示界面</p>
+   <p align="center">Retroid手柄通讯成功显示界面</p>
 
 
 
