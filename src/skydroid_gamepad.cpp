@@ -14,6 +14,7 @@
  */
 SkydroidGamepad::SkydroidGamepad(int port) : Gamepad(port) {
   button_status_.clear();
+  memset(&keys_, 0, sizeof(keys_));
 }
 
 /**
