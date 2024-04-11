@@ -5,7 +5,7 @@
 ## 1 代码下载与编译
 将代码仓库克隆到开发主机上，并进行编译：
 ```bash
-git clone --recurse-submodules git@github.com:DeepRoboticsLab/gamepad.git
+git clone --recurse-submodules https://github.com/DeepRoboticsLab/gamepad.git
 mkdir build && cd build
 cmake .. -DBUILD_EXAMPLE=ON
 make -j4
