@@ -26,6 +26,7 @@ SkydroidGamepad::SkydroidGamepad(int port) : Gamepad(port) {
  */
 bool SkydroidGamepad::UpdateData(std::vector<uint8_t>& buffer, SkydroidKeys& keys) {
   SkydroidGamepadData data;
+  timespec timestamp;
   memcpy(&data, buffer.data(), buffer.size()*sizeof(uint8_t));
   // Perform data validity check in the child class
   if (DataIsValid(data)) {
@@ -35,7 +36,8 @@ bool SkydroidGamepad::UpdateData(std::vector<uint8_t>& buffer, SkydroidKeys& key
     for(int i = 0; i < kSkydroidButtonSize; i++){
       keys_value_bit[i] = keys_ch[i];
     }
-
+    clock_gettime(CLOCK_MONOTONIC,&timestamp);
+    keys.time_stamp = (timestamp.tv_sec-start_time_.tv_sec)*1.e3 + double(timestamp.tv_nsec - start_time_.tv_nsec)/1.e6;
     keys.keys_value = keys_value_bit.to_ulong();
     keys.left_axis_x = data.left_axis_x/(float)kJoystickRange;
     keys.left_axis_y = data.left_axis_y/(float)kJoystickRange;

@@ -53,6 +53,7 @@ enum class KeyStatus {
  * @brief Structure representing the keys of a Retroid gamepad.
  */
 struct RetroidKeys {
+  double time_stamp;
   union {
     uint16_t value; /**< Union to represent the keys as a single value. */
     struct {
@@ -93,6 +94,7 @@ struct RetroidKeys {
  * @brief Structure representing the keys of a Skydroid Gamepad.
  */
 struct SkydroidKeys {
+  double time_stamp;
   union {
     uint8_t keys_value; /**< Union to represent the button as a single value. */
     struct { 

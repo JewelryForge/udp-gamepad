@@ -13,8 +13,7 @@
  */
 template <typename KeysType>
 Gamepad<KeysType>::Gamepad(int port) : stop_thread_(false), port_(port) {
-  // Start the data thread
-  // StartDataThread();
+  clock_gettime(CLOCK_MONOTONIC,&start_time_);
 }
 
 /**

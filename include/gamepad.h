@@ -77,6 +77,7 @@ protected:
     mutable std::mutex mutex_;              ///< Mutex for data access synchronization.
     KeysType keys_;                         ///< Gamepad keys.
     int port_;                              ///< The UDP port for data reception.
+    timespec start_time_;                   //receive timestamp start time
     
     /**
      * @brief Updates the gamepad data buffer and keys.

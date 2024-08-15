@@ -26,6 +26,7 @@ RetroidGamepad::RetroidGamepad(int port) : Gamepad(port) {
  */
 bool RetroidGamepad::UpdateData(std::vector<uint8_t>& buffer, RetroidKeys& keys) {
   RetroidGamepadData data;
+  timespec timestamp;
   memcpy(&data, buffer.data(), buffer.size()*sizeof(uint8_t));
   // Perform data validity check in the child class
   if (DataIsValid(data)) {
@@ -35,6 +36,8 @@ bool RetroidGamepad::UpdateData(std::vector<uint8_t>& buffer, RetroidKeys& keys)
     for(int i = 0; i < kChannlSize; i++){
       value_bit[i] = ch[i];
     }
+    clock_gettime(CLOCK_MONOTONIC,&timestamp);
+    keys.time_stamp = (timestamp.tv_sec-start_time_.tv_sec)*1.e3 + double(timestamp.tv_nsec - start_time_.tv_nsec)/1.e6;
     keys.value = value_bit.to_ulong();
 
     keys.left  = (data.left_axis_x == -kJoystickRange) ? (uint8_t)KeyStatus::kPressed 
