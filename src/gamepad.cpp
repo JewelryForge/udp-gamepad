@@ -22,7 +22,6 @@ Gamepad<KeysType>::Gamepad(int port) : stop_thread_(false), port_(port) {
 template<typename KeysType>
 void Gamepad<KeysType>::StartDataThread() {
   data_thread_ = std::thread([this]() {
-    uint32_t updateCount = 0;
     UdpReceiver udpReceiver(port_);
 
     // Loop to continuously receive data
@@ -35,11 +34,11 @@ void Gamepad<KeysType>::StartDataThread() {
       }
       // If data is valid and updated, increase the update count
       if (ret) {
-        updateCount++;
+        tick_++;
 
         // If there is an update callback function, call the callback and pass the update count
         if (updateCallback_) {
-          updateCallback_(keys_, updateCount);
+          updateCallback_(keys_, tick_);
         }
       }
     }

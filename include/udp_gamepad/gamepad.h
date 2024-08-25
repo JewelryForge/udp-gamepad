@@ -81,6 +81,7 @@ protected:
   int port_;                                               ///< The UDP port for data reception.
   timespec start_time_;                                    ///< receive timestamp start time
   std::function<void(KeysType, uint32_t)> updateCallback_; ///< Callback function for data updates.
+  std::size_t tick_{};                                     ///< message count
 
   /**
    * @brief Updates the gamepad data buffer and keys.
