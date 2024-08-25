@@ -7,13 +7,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option(UDP_GAMEPAD_BUILD_EXAMPLE "build example for udp-gamepad in C++" ON)
 
 # Add your source files
-add_library(gamepad_receiver SHARED
+add_library(udp_gamepad SHARED
     ${CMAKE_CURRENT_LIST_DIR}/src/gamepad.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/retroid_gamepad.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/skydroid_gamepad.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/udp_receiver.cpp
 )
-target_include_directories(gamepad_receiver PUBLIC
+target_include_directories(udp_gamepad PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/include
 )
 

@@ -37,8 +37,8 @@ void Gamepad<KeysType>::StartDataThread() {
         tick_++;
 
         // If there is an update callback function, call the callback and pass the update count
-        if (updateCallback_) {
-          updateCallback_(keys_, tick_);
+        if (callback_) {
+          callback_(keys_, tick_);
         }
       }
     }
@@ -64,7 +64,7 @@ void Gamepad<KeysType>::StopDataThread() {
  * @return Reference to the keys data.
  */
 template<typename KeysType>
-KeysType Gamepad<KeysType>::GetKeys() {
+KeysType Gamepad<KeysType>::GetKeys() const {
   std::lock_guard<std::mutex> lock(mutex_);
   return keys_;
 }
@@ -95,7 +95,7 @@ uint16_t Gamepad<KeysType>::CalculateCrc16(const uint8_t *data, size_t length) {
  */
 template<typename KeysType>
 void Gamepad<KeysType>::SetUpdateCallback(const std::function<void(KeysType, uint32_t)> &callback) {
-  updateCallback_ = callback;
+  callback_ = callback;
 }
 
 // Explicitly instantiate the template class for specific gamepad types

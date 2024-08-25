@@ -22,6 +22,7 @@ template<typename KeysType>
 class Gamepad {
 public:
   using Keys = KeysType;
+  using Callback = std::function<void(KeysType, uint32_t)>;
 
   std::vector<std::string> button_status_;
   /**
@@ -56,13 +57,13 @@ public:
    * @brief Gets the gamepad keys.
    * @return The current gamepad keys.
    */
-  KeysType GetKeys();
+  KeysType GetKeys() const;
 
   /**
    * @brief Sets a callback function to be called on each data update.
    * @param callback The callback function that takes an update count as an argument.
    */
-  void SetUpdateCallback(const std::function<void(KeysType, uint32_t)> &callback);
+  void SetUpdateCallback(const Callback &callback);
 
   /**
    * @brief Calculate the CRC-16 checksum for a given data buffer.
@@ -74,14 +75,14 @@ public:
   uint16_t CalculateCrc16(const uint8_t *data, size_t length);
 
 protected:
-  std::thread data_thread_;                                ///< Thread for generating simulated data.
-  std::atomic<bool> stop_thread_;                          ///< Flag to signal the data thread to stop.
-  mutable std::mutex mutex_;                               ///< Mutex for data access synchronization.
-  KeysType keys_;                                          ///< Gamepad keys.
-  int port_;                                               ///< The UDP port for data reception.
-  timespec start_time_;                                    ///< receive timestamp start time
-  std::function<void(KeysType, uint32_t)> updateCallback_; ///< Callback function for data updates.
-  std::size_t tick_{};                                     ///< message count
+  std::thread data_thread_;       ///< Thread for generating simulated data.
+  std::atomic<bool> stop_thread_; ///< Flag to signal the data thread to stop.
+  mutable std::mutex mutex_;      ///< Mutex for data access synchronization.
+  KeysType keys_;                 ///< Gamepad keys.
+  int port_;                      ///< The UDP port for data reception.
+  timespec start_time_;           ///< receive timestamp start time
+  Callback callback_;             ///< Callback function for data updates.
+  uint32_t tick_{};               ///< message count
 
   /**
    * @brief Updates the gamepad data buffer and keys.
