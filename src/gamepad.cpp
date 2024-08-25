@@ -3,6 +3,7 @@
 #include "udp_gamepad/gamepad.h"
 #include "udp_gamepad/udp_receiver.h"
 
+namespace udp_gamepad {
 /**
  * @brief Constructor for the Gamepad class.
  *
@@ -101,3 +102,4 @@ void Gamepad<KeysType>::SetUpdateCallback(const std::function<void(uint32_t)> &c
 // Explicitly instantiate the template class for specific gamepad types
 template class Gamepad<RetroidKeys>;
 template class Gamepad<SkydroidKeys>;
+}

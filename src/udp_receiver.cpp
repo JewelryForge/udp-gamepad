@@ -7,7 +7,7 @@
 
 #include "udp_gamepad/udp_receiver.h"
 
-
+namespace udp_gamepad {
 /**
  * @brief Constructor for UdpReceiver.
  * @param port The port to listen for UDP data.
@@ -64,3 +64,4 @@ UdpReceiver::~UdpReceiver() {
     close(socket_fd_);
   }
 }
+} // namespace udp_gamepad

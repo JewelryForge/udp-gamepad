@@ -3,6 +3,7 @@
 
 #include "udp_gamepad/retroid_gamepad.h"
 
+namespace udp_gamepad {
 /**
  * @brief Constructor for the RetroidGamepad class.
  *
@@ -86,3 +87,4 @@ bool RetroidGamepad::DataIsValid(const RetroidGamepadData &data) {
 
   return true;
 }
+} // namespace udp_gamepad

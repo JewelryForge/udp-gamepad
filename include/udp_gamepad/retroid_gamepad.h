@@ -3,6 +3,7 @@
 
 #include "gamepad.h"
 
+namespace udp_gamepad {
 /**
  * @brief A specialized class for RETROID gamepad.
  *
@@ -48,5 +49,7 @@ protected:
    */
   bool DataIsValid(const RetroidGamepadData &data);
 };
+} // namespace udp_gamepad
+
 
 #endif // RETROID_GAMEPAD_H

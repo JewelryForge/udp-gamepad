@@ -10,6 +10,7 @@
 
 #include "gamepad_keys.h"
 
+namespace udp_gamepad {
 /**
  * @brief A template class for a generic Gamepad.
  *
@@ -89,5 +90,7 @@ protected:
    */
   virtual bool UpdateData(std::vector<uint8_t> &buffer, KeysType &keys) = 0;
 };
+} // namespace udp_gamepad
 
-#endif
+
+#endif // GAMEPAD_H

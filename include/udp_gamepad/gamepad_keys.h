@@ -9,6 +9,7 @@
 #include <cstddef>
 #include <cstdint>
 
+namespace udp_gamepad {
 /** @brief Size of the header in bytes. */
 constexpr size_t kHeaderSize = 2;
 
@@ -184,5 +185,6 @@ struct SkydroidGamepadData {
   };
 };
 #pragma pack()
+} // namespace udp_gamepad
 
-#endif
+#endif // GAMEPAD_KEYS_H

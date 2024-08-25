@@ -3,6 +3,8 @@
 
 #include "gamepad.h"
 
+
+namespace udp_gamepad {
 /**
  * @brief A specialized class for Skydroid gamepad.
  *
@@ -48,5 +50,6 @@ protected:
    */
   bool DataIsValid(const SkydroidGamepadData &data);
 };
+}
 
 #endif // SKYDROID_GAMEPAD_H

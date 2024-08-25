@@ -3,7 +3,7 @@
 
 #include "udp_gamepad/skydroid_gamepad.h"
 
-
+namespace udp_gamepad {
 /**
  * @brief Constructor for the SkydroidGamepad class.
  *
@@ -78,3 +78,4 @@ bool SkydroidGamepad::DataIsValid(const SkydroidGamepadData &data) {
 
   return true;
 }
+} // namespace udp_gamepad
