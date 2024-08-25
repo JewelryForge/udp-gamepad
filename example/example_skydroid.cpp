@@ -11,13 +11,12 @@
 
 #include <iostream>
 
-#include "gamepad.h"
-#include "skydroid_gamepad.h"
-#include "gamepad_keys.h"
+#include "udp_gamepad/gamepad.h"
+#include "udp_gamepad/gamepad_keys.h"
+#include "udp_gamepad/skydroid_gamepad.h"
 
-#include "fmt/format.h"
-#include "fmt/core.h"
 #include "fmt/chrono.h"
+#include "fmt/format.h"
 
 void InitialSkydroidKeys(SkydroidGamepad& is){
   is.button_status_.clear();

@@ -1,8 +1,6 @@
 #ifndef SKYDROID_GAMEPAD_H
 #define SKYDROID_GAMEPAD_H
 
-#include <iostream>
-#include <ostream>
 #include "gamepad.h"
 
 /**
@@ -19,7 +17,7 @@ public:
    *
    * @param port The UDP port to use for receiving gamepad data.
    */
-  SkydroidGamepad(int port = kDefaultPort);
+  explicit SkydroidGamepad(int port = kDefaultPort);
 
   // /**
   //  * @brief Overloaded output stream operator for SkydroidGamepad.
@@ -40,7 +38,7 @@ protected:
    * @param keys The Skydroid gamepad keys to be updated.
    * @return True if the data is valid and updated, false otherwise.
    */
-  bool UpdateData(std::vector<uint8_t>& buffer, SkydroidKeys& keys) override;
+  bool UpdateData(std::vector<uint8_t> &buffer, SkydroidKeys &keys) override;
 
   /**
    * @brief Checks if the received data from the Skydroid gamepad is valid.
@@ -48,7 +46,7 @@ protected:
    * @param data The gamepad data to be validated.
    * @return True if the data is valid, false otherwise.
    */
-  bool DataIsValid(const SkydroidGamepadData& data);
+  bool DataIsValid(const SkydroidGamepadData &data);
 };
 
 #endif // SKYDROID_GAMEPAD_H

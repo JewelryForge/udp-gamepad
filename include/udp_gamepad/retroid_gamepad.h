@@ -1,8 +1,6 @@
 #ifndef RETROID_GAMEPAD_H
 #define RETROID_GAMEPAD_H
 
-#include <iostream>
-#include <ostream>
 #include "gamepad.h"
 
 /**
@@ -19,7 +17,7 @@ public:
    *
    * @param port The UDP port to use for receiving gamepad data.
    */
-  RetroidGamepad(int port = kDefaultPort);
+  explicit RetroidGamepad(int port = kDefaultPort);
 
   // /**
   //  * @brief Overloaded output stream operator for RetroidGamepad.
@@ -40,7 +38,7 @@ protected:
    * @param keys The RETROID gamepad keys to be updated.
    * @return True if the data is valid and updated, false otherwise.
    */
-  bool UpdateData(std::vector<uint8_t>& buffer, RetroidKeys& keys) override;
+  bool UpdateData(std::vector<uint8_t> &buffer, RetroidKeys &keys) override;
 
   /**
    * @brief Checks if the received data from the RETROID gamepad is valid.
@@ -48,7 +46,7 @@ protected:
    * @param data The gamepad data to be validated.
    * @return True if the data is valid, false otherwise.
    */
-  bool DataIsValid(const RetroidGamepadData& data);
+  bool DataIsValid(const RetroidGamepadData &data);
 };
 
 #endif // RETROID_GAMEPAD_H

@@ -1,8 +1,8 @@
 #ifndef UDP_RECEIVER_H
 #define UDP_RECEIVER_H
 
-#include <vector>
 #include <cstdint>
+#include <vector>
 
 /**
  * @brief The UdpReceiver class for receiving UDP data.
@@ -13,7 +13,7 @@ public:
      * @brief Constructor for UdpReceiver.
      * @param port The port to listen for UDP data.
      */
-    UdpReceiver(int port);
+    explicit UdpReceiver(int port);
 
     /**
      * @brief Receive UDP data.

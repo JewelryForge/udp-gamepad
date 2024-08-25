@@ -1,8 +1,7 @@
-#include "gamepad.h"
-#include "udp_receiver.h"
-#include <iostream>
 #include <thread>
-#include <chrono>
+
+#include "udp_gamepad/gamepad.h"
+#include "udp_gamepad/udp_receiver.h"
 
 /**
  * @brief Constructor for the Gamepad class.
@@ -11,15 +10,15 @@
  *
  * @param port The UDP port to use for receiving gamepad data.
  */
-template <typename KeysType>
+template<typename KeysType>
 Gamepad<KeysType>::Gamepad(int port) : stop_thread_(false), port_(port) {
-  clock_gettime(CLOCK_MONOTONIC,&start_time_);
+  clock_gettime(CLOCK_MONOTONIC, &start_time_);
 }
 
 /**
  * @brief Starts the data thread for continuous data reception.
  */
-template <typename KeysType>
+template<typename KeysType>
 void Gamepad<KeysType>::StartDataThread() {
   data_thread_ = std::thread([this]() {
     uint32_t updateCount = 0;
@@ -29,7 +28,7 @@ void Gamepad<KeysType>::StartDataThread() {
     while (!stop_thread_) {
       std::vector<uint8_t> receivedData = udpReceiver.ReceiveData();
       bool ret = false;
-      if(true){
+      {
         std::lock_guard<std::mutex> lock(mutex_);
         ret = UpdateData(receivedData, keys_);
       }
@@ -51,7 +50,7 @@ void Gamepad<KeysType>::StartDataThread() {
 /**
  * @brief Stops the data thread.
  */
-template <typename KeysType>
+template<typename KeysType>
 void Gamepad<KeysType>::StopDataThread() {
   stop_thread_ = true;
 
@@ -64,8 +63,8 @@ void Gamepad<KeysType>::StopDataThread() {
  *
  * @return Reference to the keys data.
  */
-template <typename KeysType>
-KeysType& Gamepad<KeysType>::GetKeys() {
+template<typename KeysType>
+KeysType Gamepad<KeysType>::GetKeys() {
   std::lock_guard<std::mutex> lock(mutex_);
   return keys_;
 }
@@ -77,8 +76,8 @@ KeysType& Gamepad<KeysType>::GetKeys() {
  * @param length Length of the data array.
  * @return The calculated CRC-16 checksum.
  */
-template <typename KeysType>
-uint16_t Gamepad<KeysType>::CalculateCrc16(const uint8_t* data, size_t length) {
+template<typename KeysType>
+uint16_t Gamepad<KeysType>::CalculateCrc16(const uint8_t *data, size_t length) {
   uint16_t crc = 0x00;
 
   // Calculate the CRC-16 checksum
@@ -94,8 +93,8 @@ uint16_t Gamepad<KeysType>::CalculateCrc16(const uint8_t* data, size_t length) {
  *
  * @param callback The callback function taking an update count as a parameter.
  */
-template <typename KeysType>
-void Gamepad<KeysType>::SetUpdateCallback(const std::function<void(uint32_t)>& callback) {
+template<typename KeysType>
+void Gamepad<KeysType>::SetUpdateCallback(const std::function<void(uint32_t)> &callback) {
   updateCallback_ = callback;
 }
 
