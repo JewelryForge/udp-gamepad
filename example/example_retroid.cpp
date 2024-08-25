@@ -111,9 +111,11 @@ int main(int argc, char *argv[]) {
 
   rc.StartDataThread();
 
-  rc.updateCallback_ = [&](int32_t count) {
-    std::cout << rc << std::endl;
-  };
+  rc.SetUpdateCallback(
+    [&](const RetroidGamepad::Keys &keys, int32_t count) {
+      std::cout << rc << std::endl;
+    }
+  );
 
   for (int i = 0; i < 100000; i++) {
     std::this_thread::sleep_for(std::chrono::seconds(1));

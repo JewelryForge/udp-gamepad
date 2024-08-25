@@ -21,6 +21,8 @@ namespace udp_gamepad {
 template<typename KeysType>
 class Gamepad {
 public:
+  using Keys = KeysType;
+
   std::vector<std::string> button_status_;
   /**
    * @brief Constructor for the Gamepad class.
@@ -60,7 +62,7 @@ public:
    * @brief Sets a callback function to be called on each data update.
    * @param callback The callback function that takes an update count as an argument.
    */
-  void SetUpdateCallback(const std::function<void(uint32_t)> &callback);
+  void SetUpdateCallback(const std::function<void(KeysType, uint32_t)> &callback);
 
   /**
    * @brief Calculate the CRC-16 checksum for a given data buffer.
@@ -71,24 +73,22 @@ public:
    */
   uint16_t CalculateCrc16(const uint8_t *data, size_t length);
 
-  std::function<void(uint32_t)> updateCallback_; ///< Callback function for data updates.
-
 protected:
-  std::thread data_thread_;       ///< Thread for generating simulated data.
-  std::atomic<bool> stop_thread_; ///< Flag to signal the data thread to stop.
-  mutable std::mutex mutex_;      ///< Mutex for data access synchronization.
-  KeysType keys_;                 ///< Gamepad keys.
-  int port_;                      ///< The UDP port for data reception.
-  timespec start_time_;           //receive timestamp start time
+  std::thread data_thread_;                                ///< Thread for generating simulated data.
+  std::atomic<bool> stop_thread_;                          ///< Flag to signal the data thread to stop.
+  mutable std::mutex mutex_;                               ///< Mutex for data access synchronization.
+  KeysType keys_;                                          ///< Gamepad keys.
+  int port_;                                               ///< The UDP port for data reception.
+  timespec start_time_;                                    ///< receive timestamp start time
+  std::function<void(KeysType, uint32_t)> updateCallback_; ///< Callback function for data updates.
 
   /**
    * @brief Updates the gamepad data buffer and keys.
    *
    * @param buffer The data buffer to be updated.
-   * @param keys The keys to be updated.
    * @return True if the data is valid and updated, false otherwise.
    */
-  virtual bool UpdateData(std::vector<uint8_t> &buffer, KeysType &keys) = 0;
+  virtual bool UpdateData(std::vector<uint8_t> &buffer) = 0;
 };
 } // namespace udp_gamepad
 

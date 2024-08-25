@@ -36,10 +36,9 @@ protected:
    * @brief Updates the RETROID gamepad data buffer and keys.
    *
    * @param buffer The data buffer to be updated.
-   * @param keys The RETROID gamepad keys to be updated.
    * @return True if the data is valid and updated, false otherwise.
    */
-  bool UpdateData(std::vector<uint8_t> &buffer, RetroidKeys &keys) override;
+  bool UpdateData(std::vector<uint8_t> &buffer) override;
 
   /**
    * @brief Checks if the received data from the RETROID gamepad is valid.
@@ -48,6 +47,9 @@ protected:
    * @return True if the data is valid, false otherwise.
    */
   bool DataIsValid(const RetroidGamepadData &data);
+
+private:
+  bool dpad_mode_{false};
 };
 } // namespace udp_gamepad
 

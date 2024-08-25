@@ -31,7 +31,7 @@ void Gamepad<KeysType>::StartDataThread() {
       bool ret = false;
       {
         std::lock_guard<std::mutex> lock(mutex_);
-        ret = UpdateData(receivedData, keys_);
+        ret = UpdateData(receivedData);
       }
       // If data is valid and updated, increase the update count
       if (ret) {
@@ -39,7 +39,7 @@ void Gamepad<KeysType>::StartDataThread() {
 
         // If there is an update callback function, call the callback and pass the update count
         if (updateCallback_) {
-          updateCallback_(updateCount);
+          updateCallback_(keys_, updateCount);
         }
       }
     }
@@ -95,11 +95,11 @@ uint16_t Gamepad<KeysType>::CalculateCrc16(const uint8_t *data, size_t length) {
  * @param callback The callback function taking an update count as a parameter.
  */
 template<typename KeysType>
-void Gamepad<KeysType>::SetUpdateCallback(const std::function<void(uint32_t)> &callback) {
+void Gamepad<KeysType>::SetUpdateCallback(const std::function<void(KeysType, uint32_t)> &callback) {
   updateCallback_ = callback;
 }
 
 // Explicitly instantiate the template class for specific gamepad types
 template class Gamepad<RetroidKeys>;
 template class Gamepad<SkydroidKeys>;
-}
+} // namespace udp_gamepad

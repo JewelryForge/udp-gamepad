@@ -20,10 +20,9 @@ RetroidGamepad::RetroidGamepad(int port) : Gamepad(port) {
  * @brief Updates the RETROID gamepad data buffer and keys.
  *
  * @param buffer The data buffer to be updated.
- * @param keys The RETROID gamepad keys to be updated.
  * @return True if the data is valid and updated, false otherwise.
  */
-bool RetroidGamepad::UpdateData(std::vector<uint8_t> &buffer, RetroidKeys &keys) {
+bool RetroidGamepad::UpdateData(std::vector<uint8_t> &buffer) {
   RetroidGamepadData data{};
   timespec timestamp{};
   memcpy(&data, buffer.data(), buffer.size() * sizeof(uint8_t));
@@ -31,32 +30,45 @@ bool RetroidGamepad::UpdateData(std::vector<uint8_t> &buffer, RetroidKeys &keys)
   if (DataIsValid(data)) {
     std::bitset<kChannlSize> value_bit(0);
     int16_t ch[kChannlSize];
+    RetroidKeys last_keys = keys_;
     memcpy(ch, data.data, sizeof(ch));
     for (int i = 0; i < kChannlSize; i++) {
       value_bit[i] = ch[i];
     }
     clock_gettime(CLOCK_MONOTONIC, &timestamp);
-    keys.time_stamp = static_cast<double>(timestamp.tv_sec - start_time_.tv_sec) * 1e3
+    keys_.time_stamp = static_cast<double>(timestamp.tv_sec - start_time_.tv_sec) * 1e3
         + static_cast<double>(timestamp.tv_nsec - start_time_.tv_nsec) / 1e6;
-    keys.value = value_bit.to_ulong();
+    keys_.value = value_bit.to_ulong();
 
-    keys.left = static_cast<uint8_t>(data.left_axis_x == -kJoystickRange
-                                       ? KeyStatus::kPressed
-                                       : KeyStatus::kReleased);
-    keys.right = static_cast<uint8_t>(data.left_axis_x == kJoystickRange
-                                        ? KeyStatus::kPressed
-                                        : KeyStatus::kReleased);
-    keys.up = static_cast<uint8_t>(data.left_axis_y == kJoystickRange
-                                     ? KeyStatus::kPressed
-                                     : KeyStatus::kReleased);
-    keys.down = static_cast<uint8_t>(data.left_axis_y == -kJoystickRange
-                                       ? KeyStatus::kPressed
-                                       : KeyStatus::kReleased);
+    if (
+      std::abs(data.left_axis_x) == kJoystickRange and last_keys.left_axis_x == 0 or
+      std::abs(data.left_axis_y) == kJoystickRange and last_keys.left_axis_y == 0
+    ) {
+      dpad_mode_ = true;
+    } else if (
+      std::abs(data.left_axis_x) != kJoystickRange or
+      std::abs(data.left_axis_y) != kJoystickRange
+    ) {
+      dpad_mode_ = false;
+    }
 
-    keys.left_axis_x = data.left_axis_x / static_cast<float>(kJoystickRange);
-    keys.left_axis_y = data.left_axis_y / static_cast<float>(kJoystickRange);
-    keys.right_axis_x = data.right_axis_x / static_cast<float>(kJoystickRange);
-    keys.right_axis_y = data.right_axis_y / static_cast<float>(kJoystickRange);
+    if (dpad_mode_) {
+      keys_.left = static_cast<uint8_t>(
+        data.left_axis_x == -kJoystickRange ? KeyStatus::kPressed : KeyStatus::kReleased);
+      keys_.right = static_cast<uint8_t>(
+        data.left_axis_x == kJoystickRange ? KeyStatus::kPressed : KeyStatus::kReleased);
+      keys_.up = static_cast<uint8_t>(
+        data.left_axis_y == kJoystickRange ? KeyStatus::kPressed : KeyStatus::kReleased);
+      keys_.down = static_cast<uint8_t>(
+        data.left_axis_y == -kJoystickRange ? KeyStatus::kPressed : KeyStatus::kReleased);
+      keys_.left_axis_x = keys_.left_axis_y = keys_.right_axis_x = keys_.right_axis_y = 0;
+    } else {
+      keys_.left_axis_x = data.left_axis_x / static_cast<float>(kJoystickRange);
+      keys_.left_axis_y = data.left_axis_y / static_cast<float>(kJoystickRange);
+      keys_.right_axis_x = data.right_axis_x / static_cast<float>(kJoystickRange);
+      keys_.right_axis_y = data.right_axis_y / static_cast<float>(kJoystickRange);
+      keys_.left = keys_.right = keys_.up = keys_.down = 0;
+    }
 
     return true;
   }

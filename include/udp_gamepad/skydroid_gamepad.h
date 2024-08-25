@@ -37,10 +37,9 @@ protected:
    * @brief Updates the Skydroid gamepad data buffer and keys.
    *
    * @param buffer The data buffer to be updated.
-   * @param keys The Skydroid gamepad keys to be updated.
    * @return True if the data is valid and updated, false otherwise.
    */
-  bool UpdateData(std::vector<uint8_t> &buffer, SkydroidKeys &keys) override;
+  bool UpdateData(std::vector<uint8_t> &buffer) override;
 
   /**
    * @brief Checks if the received data from the Skydroid gamepad is valid.
@@ -50,6 +49,6 @@ protected:
    */
   bool DataIsValid(const SkydroidGamepadData &data);
 };
-}
+} // namespace udp_gamepad
 
 #endif // SKYDROID_GAMEPAD_H
